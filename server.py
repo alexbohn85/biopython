@@ -1,29 +1,24 @@
 #!/usr/bin/env python
-
+# Import smtplib for the actual sending function
 import smtplib
 
-def prompt(prompt):
-    return raw_input(prompt).strip()
+# Import the email modules we'll need
+from email.mime.text import MIMEText
 
-fromaddr = prompt("From: ")
-toaddrs  = prompt("To: ").split()
-print "Enter message, end with ^D (Unix) or ^Z (Windows):"
+# Open a plain text file for reading.  For this example, assume that
+# the text file contains only ASCII characters.
+# Create a text/plain message
+msg = MIMEText("Teste Teste Teste!!")
 
-# Add the From: and To: headers at the start!
-msg = ("From: %s\r\nTo: %s\r\n\r\n"
-       % (fromaddr, ", ".join(toaddrs)))
-while 1:
-    try:
-        line = raw_input()
-    except EOFError:
-        break
-    if not line:
-        break
-    msg = msg + line
 
-print "Message length is " + repr(len(msg))
+# me == the sender's email address
+# you == the recipient's email address
+msg['Subject'] = 'The contents of %s' % textfile
+msg['From'] = "teste@teste.com"
+msg['To'] = "teste@teste.com"
 
-server = smtplib.SMTP('localhost')
-server.set_debuglevel(1)
-server.sendmail(fromaddr, toaddrs, msg)
-server.quit()
+# Send the message via our own SMTP server, but don't include the
+# envelope header.
+s = smtplib.SMTP('localhost')
+s.sendmail("teste@teste.com", "teste@teste.com", msg.as_string())
+s.quit()
