@@ -1,6 +1,5 @@
-django
 gunicorn
 django-heroku
-requests
+requests=2.24.0
 sched
 time

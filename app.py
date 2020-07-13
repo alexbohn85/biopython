@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 import requests
 import sched, time
 
@@ -13,5 +14,5 @@ def check_changes(url):
     else:
         print('They are different')
 
-s.enter(15, 1, check_changes, url)
+s.enter(4, 1, check_changes, url)
 s.run()
