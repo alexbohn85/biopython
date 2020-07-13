@@ -11,7 +11,7 @@ def check_changes(url):
     response = requests.get(url)
     if loc_response == response:
         print('They are the same')
-    else
+    else:
         print('They are different')
 
 s.enter(4, 1, check_changes, url)
